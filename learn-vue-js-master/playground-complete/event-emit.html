@@ -7,17 +7,27 @@
     <title>Document</title>
 </head>
 <body>
+    <!-- 
+        $on : 이벤트 감지
+        $emit: 이벤트 트리거
+     -->
     <div id="app">
         <!-- <app-header v-on:하위 컴포넌트에서 발생한 이벤트 이름></app-header> -->
-        <app-header v-on:pass="logText"></app-header>
+        <!-- v-on 자식 컴포넌트에서 보내진 이벤트 청취 -->
 
+        <!-- v-on 자식이 보낸 pass 이벤트를 청취하여 부모 메소드 logText 에서 동작 -->
+        <app-header v-on:pass="logText"></app-header>
+        <app-content v-on:add="addNum"></app-content>
+        {{num}}
     </div>
     <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
     <script>
         var appHeader = {
+            // v-on click 이벤트를 감지 passEvent 동작
             template: '<button v-on:click="passEvent">Click me</button>',
             methods: {
                 passEvent: function(){
+                    // emit click이 됐을 경우 vue상에 pass를 출력
                     this.$emit('pass');
                 }
             }
@@ -26,11 +36,11 @@
             template: '<button v-on:click="addNumber">add</button>',
             methods: {
                 addNumber: function(){
-
+                    this.$emit('add');
                 }
             }
         }
-        new Vue({
+        var vm = new Vue({
             el: '#app',
             components: {
                 'app-header': appHeader,
@@ -39,7 +49,15 @@
             methods: {
                 logText: function(){
                     console.log('hi');
+                },
+                // ...
+                addNum: function(){
+                    this.num += 1;
                 }
+
+            },
+            data: {
+                num: 10
             }
         })
     </script>
