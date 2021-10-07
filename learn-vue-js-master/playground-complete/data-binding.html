@@ -7,8 +7,47 @@
     <title>Document</title>
 </head>
 <body>
-    <div id="app"></div>
+    <div id="app">
+        <!-- 
+            v-if와 v-show의 차이
+            - v-if는 말그대로 if-else문
+            - v-show는 false시 자동으로 display:none으로 처리
+         -->
+        <div v-if="loading">
+            Loading ... 
+        </div>
+        <div v-else>
+            test user has been logged in
+        </div>
+        <div v-show="loading">
+            Loading ...
+        </div>
+
+        <!-- TODO: 인풋 박스를 만들고 입력된 값을 p 태그에 출력해보기 -->
+        <input v-model="message" placeholder="use v-model" type="text">
+        <p>Message is : {{message}}</p>
+
+        <!-- <p id="abc1234">{{num}}</p> -->
+        <p v-bind:id="uuid" v-bind:class="name">{{num}}</p>
+        <p>{{doubleNum}}</p>
+    </div>
     <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
-    <script></script>
+    <script>
+        new Vue({
+            el: '#app',
+            data: {
+                num: 10,
+                uuid: 'abc1234',
+                name: 'text-blue',
+                loading: true,
+                message: ''
+            },
+            computed: {
+                doubleNum: function(){
+                    return this.num * 2;
+                }
+            }
+        })
+    </script>
 </body>
 </html>
