@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div id="app">
+        {{num}}
+        <button v-on:click="addNum">increase</button>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script>
+        new Vue({
+            el:'#app',
+            data: {
+                num: 10
+            },
+            // watch: 데이터의 변화에 따라서 특정 로직을 조작할 수 있음
+            watch: {
+                num: function(){
+                    this.logText();
+                }
+            },
+            methods: {
+                addNum: function(){
+                    this.num = this.num + 1;
+                },
+                logText: function(){
+                    console.log('changed');
+                }
+            }
+        })
+
+        // computed는 간단한 text 연산, validation 쪽에 넣는 것 적합
+        // watch는 무거운 동작들 특히 데이터 요청에 적합
+        // method에 있는 요소들을 엮어주는 것이 좋다.
+    </script>
+</body>
+</html>
