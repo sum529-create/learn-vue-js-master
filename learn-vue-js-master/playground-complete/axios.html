@@ -21,7 +21,7 @@
             },
             methods: {
                 getData: function(){
-                    // axios안의 this와 이 위치의 this는 다른 용도로 사용된다.
+                    // axios안의 this와 이 위치의 this는 다른 용도로 사용된다. (이 위치와 ajax 위치의 this가 다름)
                     // axios안에 this를 사용하기 위해 vm 변수 (대체로 이렇게 사용됨)을 만들어 this를 담아둔다.
                     var vm = this;
                     axios.get('https://jsonplaceholder.typicode.com/users/')

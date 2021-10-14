@@ -14,13 +14,13 @@
     <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
     <script>
         var appHeader = {
-            template: '<h1>header</h1>',
+            template: '<h1>{{propsdata}}</h1>',
             props: ['propsdata'],
         }
         var appContent = {
             template: '<div>content<button v-on:click="passNum">pass</button></div>',
             methods: {
-                passNum:function(){
+                passNum:function(){ // event를 통해 상위 root로 10을 전송
                     this.$emit('pass', 10);
                 }
             }
@@ -35,7 +35,7 @@
                 num: 0
             },
             methods: {
-                deliverNum: function(value) {
+                deliverNum: function(value) {   // root에서는 value로 props로 10을 받아서 사용
                     this.num = value;
                 }
             }
